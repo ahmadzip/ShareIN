@@ -10,34 +10,32 @@
 
 ## 📖 Description
 
-SHARAEIN is a modern, real-time file sharing application that allows users to create password-protected rooms and share files instantly with other users. Built with a focus on security, performance, and user experience.
+SHARAEIN is a modern, real-time file sharing application that allows users to create password-protected rooms and share files instantly with other users. Originally created for a backend development assignment, this project was built with genuine passion and addresses a real-world problem.
 
-## ✨ Features
+### 💡 The Problem It Solves
 
-### 🏠 Room Management
-- **Create Private Rooms** - Generate unique 6-character room IDs
-- **Password Protection** - Secure rooms with custom passwords
-- **Easy Access** - Simple room joining with ID and password
-- **Real-time Updates** - Instant notifications when users join/leave
+In our daily lives, people often resort to logging into WhatsApp or Telegram on public computers just to transfer files from their phones to computers. This creates a significant security risk as users frequently forget to log out of their personal accounts on public machines, potentially exposing their private conversations and data.
 
-### 📁 File Sharing
-- **Universal File Support** - Upload ANY file type without restrictions
-- **Large File Support** - Up to 500MB file size limit
-- **Drag & Drop** - Modern file upload interface
-- **Real-time Sync** - Files appear instantly for all room members
-- **Smart Icons** - Automatic file type detection with appropriate icons
+SHARAEIN eliminates this outdated and risky practice by providing a secure, temporary, and password-protected environment for file sharing without requiring any personal account login. Simply create a room, share the ID and password, transfer your files, and close the session - no personal data left behind.
 
-### 🔒 Security & Authentication
-- **JWT Authentication** - Secure token-based sessions
-- **Password Hashing** - bcrypt encryption for room passwords
-- **Route Protection** - Prevent unauthorized room access
-- **Token Validation** - Secure file download with token verification
-
-### 🎨 Modern UI/UX
-- **Responsive Design** - Works on desktop and mobile devices
-- **Real-time Status** - Live connection status indicators
-- **Toast Notifications** - User-friendly feedback messages
-- **Tailwind CSS** - Beautiful and consistent styling
+### 🚀 Key Features
+- **Create Private Rooms**: Generate unique 6-character room IDs
+- **Password Protection**: Secure rooms with custom passwords
+- **Easy Access**: Simple room joining with ID and password
+- **Real-time Updates**: Instant notifications when users join/leave
+- **Universal File Support**: Upload ANY file type without restrictions
+- **Large File Support**: Up to 500MB file size limit
+- **Drag & Drop**: Modern file upload interface
+- **Real-time Sync**: Files appear instantly for all room members
+- **Smart Icons**: Automatic file type detection with appropriate icons
+- **JWT Authentication**: Secure token-based sessions
+- **Password Hashing**: bcrypt encryption for room passwords
+- **Route Protection**: Prevent unauthorized room access
+- **Token Validation**: Secure file download with token verification
+- **Responsive Design**: Works on desktop and mobile devices
+- **Real-time Status**: Live connection status indicators
+- **Toast Notifications**: User-friendly feedback messages
+- **Tailwind CSS**: Beautiful and consistent styling
 
 ## 🛠️ Tech Stack
 
@@ -215,6 +213,27 @@ SHARAEIN supports **ALL file types** including:
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🚀 Future Roadmap & TODO
+
+### 📋 Planned Features
+
+- [ ] **File Preview** - View images, PDFs, videos directly in browser
+- [ ] **Room Member List** - Show who's currently in the room
+- [ ] **User Management** - Kick users from room (room creator only)
+- [ ] **Room Settings** - Edit room name and change password
+- [ ] **Dark Mode** - Toggle between light and dark themes
+- [ ] **File Search** - Search and filter files by name/type
+- [ ] **Mobile PWA** - Progressive Web App for better mobile experience
+
+### 🎯 Contributing
+
+Want to help implement these features? Feel free to:
+1. Pick an item from the TODO list
+2. Create an issue to discuss implementation  
+3. Submit a pull request
+
+---
 
 ## 🙏 Acknowledgments
 
