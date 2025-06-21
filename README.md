@@ -230,13 +230,7 @@ SHARAEIN supports **ALL file types** including:
 
 ## 🎥 Demo Video
 
-<div align="center">
-  <video width="640" height="480" controls>
-    <source src="/DEMO_SHAREIN.mkv" type="video/x-matroska">
-    Your browser does not support the video tag.
-  </video>
-  <p><em>Watch the full demo of SHARAEIN in action</em></p>
-</div>
+![Demo](https://github.com/ahmadzip/ShareIN/blob/main/demo.gif)
 
 ## 🤝 Contributing
 
