@@ -9,6 +9,10 @@ import {
   Video,
   Music,
   Archive,
+  File,
+  Code,
+  FileSpreadsheet,
+  Presentation,
 } from "lucide-react";
 
 interface FileListProps {
@@ -30,20 +34,77 @@ export const FileList: React.FC<FileListProps> = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  const getFileIcon = (mimetype: string) => {
+  const getFileIcon = (mimetype: string, filename: string) => {
+    // Check by mimetype first
     if (mimetype.startsWith("image/"))
       return <Image className="h-5 w-5 text-blue-500" />;
     if (mimetype.startsWith("video/"))
       return <Video className="h-5 w-5 text-purple-500" />;
     if (mimetype.startsWith("audio/"))
       return <Music className="h-5 w-5 text-green-500" />;
+
+    // Archives
     if (
       mimetype.includes("zip") ||
       mimetype.includes("rar") ||
-      mimetype.includes("tar")
+      mimetype.includes("tar") ||
+      mimetype.includes("7z") ||
+      mimetype.includes("gz")
     ) {
       return <Archive className="h-5 w-5 text-orange-500" />;
     }
+
+    // Documents
+    if (mimetype.includes("pdf"))
+      return <FileText className="h-5 w-5 text-red-500" />;
+    if (mimetype.includes("word") || mimetype.includes("document"))
+      return <FileText className="h-5 w-5 text-blue-600" />;
+    if (mimetype.includes("excel") || mimetype.includes("spreadsheet"))
+      return <FileSpreadsheet className="h-5 w-5 text-green-600" />;
+    if (
+      mimetype.includes("powerpoint") ||
+      mimetype.includes("presentation")
+    )
+      return <Presentation className="h-5 w-5 text-orange-600" />;
+
+    // Check by file extension
+    const extension = filename.split(".").pop()?.toLowerCase();
+    if (extension) {
+      // Code files
+      if (
+        [
+          "js",
+          "ts",
+          "jsx",
+          "tsx",
+          "html",
+          "css",
+          "scss",
+          "php",
+          "py",
+          "java",
+          "cpp",
+          "c",
+          "h",
+          "json",
+          "xml",
+        ].includes(extension)
+      ) {
+        return <Code className="h-5 w-5 text-indigo-500" />;
+      }
+
+      // Executables
+      if (["exe", "msi", "app", "deb", "rpm", "dmg"].includes(extension)) {
+        return <File className="h-5 w-5 text-red-600" />;
+      }
+
+      // Additional archives
+      if (["iso", "img", "bin"].includes(extension)) {
+        return <Archive className="h-5 w-5 text-orange-500" />;
+      }
+    }
+
+    // Default file icon
     return <FileText className="h-5 w-5 text-gray-500" />;
   };
 
@@ -100,7 +161,7 @@ export const FileList: React.FC<FileListProps> = ({
               className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <div className="flex items-center space-x-3 flex-1 min-w-0">
-                {getFileIcon(file.mimetype)}
+                {getFileIcon(file.mimetype, file.filename)}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 truncate">
                     {file.filename}

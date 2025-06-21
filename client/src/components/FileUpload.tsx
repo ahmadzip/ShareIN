@@ -105,7 +105,9 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
           >
             Choose File
           </label>
-          <p className="text-xs text-gray-400 mt-4">Maximum file size: 100MB</p>
+          <p className="text-xs text-gray-400 mt-4">
+            Maximum file size: 500MB • All file types supported
+          </p>
         </div>
       ) : (
         <div className="space-y-4">

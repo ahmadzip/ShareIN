@@ -1,6 +1,15 @@
 import { io, Socket } from 'socket.io-client';
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:3000';
+const getSocketUrl = () => {
+  const currentHost = window.location.host;
+  if (currentHost.includes('devtunnels.ms')) {
+    return `https://${currentHost.replace('-5173', '-3000')}`;
+  }
+
+  return import.meta.env.VITE_SOCKET_URL || 'http://localhost:3000';
+};
+
+const SOCKET_URL = getSocketUrl();
 
 class SocketService {
   private socket: Socket | null = null;
@@ -8,8 +17,12 @@ class SocketService {
   connect(): Socket {
     if (!this.socket) {
       this.socket = io(SOCKET_URL, {
-        autoConnect: false,
+        autoConnect: true,
         transports: ['websocket', 'polling'],
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionAttempts: 5,
+        timeout: 20000,
       });
     }
 
@@ -71,6 +84,10 @@ class SocketService {
 
   isConnected(): boolean {
     return this.socket?.connected || false;
+  }
+
+  getSocket(): Socket | null {
+    return this.socket;
   }
 }
 

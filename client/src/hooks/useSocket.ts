@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { socketService } from '../services/socket';
 import { AppFile } from '../types';
 
@@ -18,11 +18,34 @@ export const useSocket = ({
   onUserLeft,
 }: UseSocketProps) => {
   const socketRef = useRef(socketService);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const socket = socketRef.current.connect();
+    const handleConnect = () => {
+      console.log('Socket connected');
+      setIsConnected(true);
+      if (roomId) {
+        socket.emit('join_room', roomId);
+      }
+    };
 
-    if (roomId) {
+    const handleDisconnect = () => {
+      console.log('Socket disconnected');
+      setIsConnected(false);
+    };
+
+    const handleConnectError = (error: any) => {
+      console.error('Socket connection error:', error);
+      setIsConnected(false);
+    };
+
+    setIsConnected(socket.connected);
+    socket.on('connect', handleConnect);
+    socket.on('disconnect', handleDisconnect);
+    socket.on('connect_error', handleConnectError);
+
+    if (socket.connected && roomId) {
       socket.emit('join_room', roomId);
     }
 
@@ -43,16 +66,21 @@ export const useSocket = ({
       if (roomId) {
         socket.emit('leave_room', roomId);
       }
+
+      socket.off('connect', handleConnect);
+      socket.off('disconnect', handleDisconnect);
+      socket.off('connect_error', handleConnectError);
       socket.off('new_file');
       socket.off('file_deleted');
       socket.off('user_joined');
       socket.off('user_left');
+
       socketRef.current.disconnect();
     };
   }, [roomId, onNewFile, onFileDeleted, onUserJoined, onUserLeft]);
 
   return {
-    isConnected: socketRef.current.isConnected(),
+    isConnected,
     joinRoom: socketRef.current.joinRoom.bind(socketRef.current),
     leaveRoom: socketRef.current.leaveRoom.bind(socketRef.current),
   };

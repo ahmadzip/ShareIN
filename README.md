@@ -1,128 +1,230 @@
-# SHARAEIN - File Sharing Application
+# SHARAEIN - Real-time File Sharing Application
 
-Aplikasi web full-stack untuk berbagi file secara real-time dalam room privat yang dilindungi kata sandi.
+<div align="center">
+  <img src="https://img.shields.io/badge/Made%20with-TypeScript-blue?style=for-the-badge&logo=typescript" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Backend-Express.js-green?style=for-the-badge&logo=express" alt="Express.js">
+  <img src="https://img.shields.io/badge/Frontend-React.js-61DAFB?style=for-the-badge&logo=react" alt="React.js">
+  <img src="https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite" alt="SQLite">
+  <img src="https://img.shields.io/badge/Real--time-Socket.IO-010101?style=for-the-badge&logo=socket.io" alt="Socket.IO">
+</div>
 
-## 🚀 Fitur Utama
+## 📖 Description
 
-1. **Manajemen Room**
-   - Buat room baru dengan nama dan kata sandi
-   - ID room unik 6 digit alfanumerik
-   - Join room dengan ID dan kata sandi
+SHARAEIN is a modern, real-time file sharing application that allows users to create password-protected rooms and share files instantly with other users. Built with a focus on security, performance, and user experience.
 
-2. **Berbagi File Real-time**
-   - Upload file dalam room
-   - Download file dari room
-   - Delete file dengan sinkronisasi real-time
-   - Update otomatis tanpa refresh halaman
+## ✨ Features
 
-3. **Keamanan**
-   - Password hashing dengan bcrypt
-   - JWT authentication
-   - File storage di server lokal
+### 🏠 Room Management
+- **Create Private Rooms** - Generate unique 6-character room IDs
+- **Password Protection** - Secure rooms with custom passwords
+- **Easy Access** - Simple room joining with ID and password
+- **Real-time Updates** - Instant notifications when users join/leave
+
+### 📁 File Sharing
+- **Universal File Support** - Upload ANY file type without restrictions
+- **Large File Support** - Up to 500MB file size limit
+- **Drag & Drop** - Modern file upload interface
+- **Real-time Sync** - Files appear instantly for all room members
+- **Smart Icons** - Automatic file type detection with appropriate icons
+
+### 🔒 Security & Authentication
+- **JWT Authentication** - Secure token-based sessions
+- **Password Hashing** - bcrypt encryption for room passwords
+- **Route Protection** - Prevent unauthorized room access
+- **Token Validation** - Secure file download with token verification
+
+### 🎨 Modern UI/UX
+- **Responsive Design** - Works on desktop and mobile devices
+- **Real-time Status** - Live connection status indicators
+- **Toast Notifications** - User-friendly feedback messages
+- **Tailwind CSS** - Beautiful and consistent styling
 
 ## 🛠️ Tech Stack
 
 ### Backend
-- **Framework:** Express.js + TypeScript
-- **Real-time:** Socket.IO
-- **Database:** SQLite
-- **ORM:** Prisma
-- **Validasi:** Zod
-- **Keamanan:** bcrypt, JWT
+- **Framework:** Express.js with TypeScript
+- **Database:** SQLite with Prisma ORM
+- **Real-time:** Socket.IO for live updates
+- **Authentication:** JWT + bcrypt
+- **Validation:** Zod schemas
+- **File Upload:** Multer middleware
 
 ### Frontend
-- **Library:** React.js + TypeScript
-- **Build Tool:** Vite
+- **Library:** React.js with TypeScript
+- **Build Tool:** Vite for fast development
 - **Styling:** Tailwind CSS
 - **HTTP Client:** Axios
-- **Socket Client:** Socket.IO Client
-
-## 📁 Struktur Proyek
-
-```
-sharaein/
-├── server/                 # Backend Express.js
-│   ├── prisma/
-│   │   ├── schema.prisma
-│   │   └── migrations/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── index.ts
-│   ├── uploads/           # File storage
-│   ├── .env
-│   ├── package.json
-│   └── tsconfig.json
-├── client/                # Frontend React.js
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── hooks/
-│   │   ├── types/
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   └── tailwind.config.js
-└── README.md
-```
-
-## 🏗️ Arsitektur
-
-### Database Schema
-- **Room:** id, name, password (hashed), createdAt
-- **File:** id, filename, path, mimetype, size, roomId, createdAt
-
-### API Endpoints
-- `POST /api/rooms` - Buat room baru
-- `POST /api/rooms/join` - Join room dengan ID dan password
-- `GET /api/rooms/:roomId/files` - Ambil daftar file dalam room
-- `POST /api/rooms/:roomId/upload` - Upload file ke room
-- `DELETE /api/files/:fileId` - Hapus file dari room
-- `GET /uploads/:filename` - Download file
-
-### Socket.IO Events
-- `join_room` - Join ke room tertentu
-- `new_file` - Broadcast file baru ke semua anggota room
-- `file_deleted` - Broadcast penghapusan file ke semua anggota room
+- **Routing:** React Router
+- **Icons:** Lucide React
+- **Notifications:** React Hot Toast
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
-- npm atau yarn
+- Node.js 18+ and npm
+- Git (optional)
 
 ### Installation
 
-1. Clone repository
+1. **Clone the repository**
 ```bash
 git clone <repository-url>
 cd sharaein
 ```
 
-2. Setup Backend
+2. **Setup Backend**
 ```bash
 cd server
 npm install
+cp .env.example .env
+# Edit .env file with your configuration
+npx prisma generate
 npx prisma migrate dev --name init
 npm run dev
 ```
 
-3. Setup Frontend
+3. **Setup Frontend** (in new terminal)
 ```bash
-cd ../client
+cd client
 npm install
+cp .env.example .env
+# Edit .env file with your backend URLs
 npm run dev
 ```
 
-4. Akses aplikasi di `http://localhost:5173`
+4. **Access the application**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3000
 
-## 🔧 Development Guide
+## ⚙️ Configuration
 
-Lihat file dokumentasi individual di setiap folder untuk panduan pengembangan lebih detail.
+### Backend Environment Variables (.env)
+```bash
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="your-super-secret-jwt-key"
+PORT=3000
+CLIENT_URL="http://localhost:5173"
+```
+
+### Frontend Environment Variables (.env)
+```bash
+VITE_API_URL="http://localhost:3000/api"
+VITE_SOCKET_URL="http://localhost:3000"
+```
+
+## 🌐 Dev Tunnels Support
+
+For accessing from external devices or sharing with others:
+
+1. **Create dev tunnels**
+```bash
+# Backend tunnel
+devtunnel host -p 3000 --allow-anonymous
+
+# Frontend tunnel  
+devtunnel host -p 5173 --allow-anonymous
+```
+
+2. **Update environment variables** with tunnel URLs
+
+The application includes auto-detection for dev tunnel environments!
+
+## 📁 Project Structure
+
+```
+sharaein/
+├── server/                 # Backend Express.js
+│   ├── prisma/
+│   │   └── schema.prisma  # Database schema
+│   ├── src/
+│   │   ├── controllers/   # API logic
+│   │   ├── routes/        # API endpoints
+│   │   ├── services/      # Socket.IO handlers
+│   │   ├── utils/         # Utilities & middleware
+│   │   └── index.ts       # Server entry point
+│   ├── uploads/           # File storage
+│   └── .env.example       # Environment template
+├── client/                # Frontend React.js
+│   ├── src/
+│   │   ├── components/    # UI components
+│   │   ├── pages/         # Application pages
+│   │   ├── services/      # API & Socket clients
+│   │   ├── hooks/         # Custom React hooks
+│   │   └── types/         # TypeScript definitions
+│   └── .env.example       # Environment template
+└── README.md
+```
+
+## 🔌 API Endpoints
+
+### Room Management
+- `POST /api/rooms` - Create new room
+- `POST /api/rooms/join` - Join existing room
+- `GET /api/rooms/:roomId/files` - Get room files
+
+### File Operations
+- `POST /api/files/rooms/:roomId/upload` - Upload file
+- `DELETE /api/files/:fileId` - Delete file
+- `GET /api/files/:fileId/download` - Download file
+
+### Health Check
+- `GET /api/health` - Server health status
+
+## 🎯 Socket.IO Events
+
+### Client → Server
+- `join_room` - Join specific room
+- `leave_room` - Leave room
+
+### Server → Client
+- `new_file` - New file uploaded
+- `file_deleted` - File deleted
+- `user_joined` - User joined room
+- `user_left` - User left room
+
+## 🔒 Security Features
+
+- **Password Protection** - All rooms secured with hashed passwords
+- **JWT Authentication** - Secure session management
+- **Route Guards** - Protected routes prevent unauthorized access
+- **Input Validation** - Server-side validation with Zod
+- **CORS Protection** - Configured for secure cross-origin requests
+- **File Size Limits** - 500MB maximum file size
+
+## 📱 Supported File Types
+
+SHARAEIN supports **ALL file types** including:
+
+- 📄 **Documents** - PDF, Word, Excel, PowerPoint
+- 🖼️ **Images** - JPEG, PNG, GIF, SVG, WebP
+- 🎵 **Audio** - MP3, WAV, FLAC, OGG
+- 🎬 **Video** - MP4, AVI, MOV, MKV
+- 📦 **Archives** - ZIP, RAR, 7Z, TAR, ISO
+- 💻 **Code** - JS, TS, Python, Java, C++
+- 🔧 **Executables** - EXE, MSI, APP, DEB
+- **And ANY other file format!**
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📝 License
 
-MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with modern web technologies
+- Inspired by the need for simple, secure file sharing
+- Thanks to the open-source community
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for seamless file sharing</p>
+  <p>⭐ Star this repo if you find it helpful!</p>
+</div>

@@ -3,10 +3,12 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs/promises';
-import { generateUniqueFilename } from '../utils/auth';
+import { generateUniqueFilename, verifyToken } from '../utils/auth';
 import { io } from '../index';
 
 const prisma = new PrismaClient();
+
+// Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = path.join(__dirname, '../../uploads');
@@ -21,9 +23,10 @@ const storage = multer.diskStorage({
 export const upload = multer({
   storage,
   limits: {
-    fileSize: 100 * 1024 * 1024,
+    fileSize: 500 * 1024 * 1024, // Increase to 500MB limit
   },
   fileFilter: (req, file, cb) => {
+    // Accept ALL file types without any restriction
     cb(null, true);
   }
 });
@@ -119,6 +122,17 @@ export const deleteFile = async (req: Request, res: Response) => {
 export const downloadFile = async (req: Request, res: Response) => {
   try {
     const { fileId } = req.params;
+    const token = req.query.token as string;
+    if (token) {
+      try {
+        verifyToken(token);
+      } catch (error) {
+        return res.status(403).json({
+          success: false,
+          message: 'Invalid or expired token, please log in again'
+        });
+      }
+    }
 
     const file = await prisma.file.findUnique({
       where: { id: fileId }

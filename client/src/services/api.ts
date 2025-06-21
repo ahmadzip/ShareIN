@@ -1,7 +1,15 @@
 import axios from 'axios';
 import { CreateRoomData, JoinRoomData, CreateRoomResponse, JoinRoomResponse, ApiResponse, AppFile } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const getApiBaseUrl = () => {
+  const currentHost = window.location.host;
+  if (currentHost.includes('devtunnels.ms')) {
+    return `https://${currentHost.replace('-5173', '-3000')}/api`;
+  }
+  return import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -52,7 +60,9 @@ export const fileApi = {
   },
 
   getDownloadUrl: (fileId: string): string => {
-    return `${API_BASE_URL}/files/${fileId}/download`;
+    const token = localStorage.getItem('sharaein_token');
+    const baseUrl = `${API_BASE_URL}/files/${fileId}/download`;
+    return token ? `${baseUrl}?token=${encodeURIComponent(token)}` : baseUrl;
   },
 };
 

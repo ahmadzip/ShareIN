@@ -41,6 +41,7 @@ export const RoomPage: React.FC = () => {
     []
   );
 
+  // Setup socket connection
   const { isConnected } = useSocket({
     roomId,
     onNewFile: handleNewFile,
@@ -153,11 +154,15 @@ export const RoomPage: React.FC = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center text-sm text-gray-500">
                 <div
-                  className={`w-2 h-2 rounded-full mr-2 ${
+                  className={`w-2 h-2 rounded-full mr-2 animate-pulse ${
                     isConnected ? "bg-green-500" : "bg-red-500"
                   }`}
                 ></div>
-                {isConnected ? "Connected" : "Disconnected"}
+                <span
+                  className={isConnected ? "text-green-600" : "text-red-600"}
+                >
+                  {isConnected ? "Connected" : "Connecting..."}
+                </span>
               </div>
               <button
                 onClick={handleLeaveRoom}
