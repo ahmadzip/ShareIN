@@ -18,7 +18,16 @@ In our daily lives, people often resort to logging into WhatsApp or Telegram on 
 
 SHARAEIN eliminates this outdated and risky practice by providing a secure, temporary, and password-protected environment for file sharing without requiring any personal account login. Simply create a room, share the ID and password, transfer your files, and close the session - no personal data left behind.
 
+### 👥 Team Members
+
+- **5220411082** - Restu Sofyan Ma'arif
+- **5220411358** - Musyafa Ali
+- **5220411084** - Ahmad Sulaeman
+
+---
+
 ### 🚀 Key Features
+
 - **Create Private Rooms**: Generate unique 6-character room IDs
 - **Password Protection**: Secure rooms with custom passwords
 - **Easy Access**: Simple room joining with ID and password
@@ -40,6 +49,7 @@ SHARAEIN eliminates this outdated and risky practice by providing a secure, temp
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Framework:** Express.js with TypeScript
 - **Database:** SQLite with Prisma ORM
 - **Real-time:** Socket.IO for live updates
@@ -48,6 +58,7 @@ SHARAEIN eliminates this outdated and risky practice by providing a secure, temp
 - **File Upload:** Multer middleware
 
 ### Frontend
+
 - **Library:** React.js with TypeScript
 - **Build Tool:** Vite for fast development
 - **Styling:** Tailwind CSS
@@ -59,18 +70,21 @@ SHARAEIN eliminates this outdated and risky practice by providing a secure, temp
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Git (optional)
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone <repository-url>
 cd sharaein
 ```
 
 2. **Setup Backend**
+
 ```bash
 cd server
 npm install
@@ -82,6 +96,7 @@ npm run dev
 ```
 
 3. **Setup Frontend** (in new terminal)
+
 ```bash
 cd client
 npm install
@@ -91,12 +106,14 @@ npm run dev
 ```
 
 4. **Access the application**
+
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:3000
 
 ## ⚙️ Configuration
 
 ### Backend Environment Variables (.env)
+
 ```bash
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="your-super-secret-jwt-key"
@@ -105,6 +122,7 @@ CLIENT_URL="http://localhost:5173"
 ```
 
 ### Frontend Environment Variables (.env)
+
 ```bash
 VITE_API_URL="http://localhost:3000/api"
 VITE_SOCKET_URL="http://localhost:3000"
@@ -115,11 +133,12 @@ VITE_SOCKET_URL="http://localhost:3000"
 For accessing from external devices or sharing with others:
 
 1. **Create dev tunnels**
+
 ```bash
 # Backend tunnel
 devtunnel host -p 3000 --allow-anonymous
 
-# Frontend tunnel  
+# Frontend tunnel
 devtunnel host -p 5173 --allow-anonymous
 ```
 
@@ -156,25 +175,30 @@ sharaein/
 ## 🔌 API Endpoints
 
 ### Room Management
+
 - `POST /api/rooms` - Create new room
 - `POST /api/rooms/join` - Join existing room
 - `GET /api/rooms/:roomId/files` - Get room files
 
 ### File Operations
+
 - `POST /api/files/rooms/:roomId/upload` - Upload file
 - `DELETE /api/files/:fileId` - Delete file
 - `GET /api/files/:fileId/download` - Download file
 
 ### Health Check
+
 - `GET /api/health` - Server health status
 
 ## 🎯 Socket.IO Events
 
 ### Client → Server
+
 - `join_room` - Join specific room
 - `leave_room` - Leave room
 
 ### Server → Client
+
 - `new_file` - New file uploaded
 - `file_deleted` - File deleted
 - `user_joined` - User joined room
@@ -229,8 +253,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### 🎯 Contributing
 
 Want to help implement these features? Feel free to:
+
 1. Pick an item from the TODO list
-2. Create an issue to discuss implementation  
+2. Create an issue to discuss implementation
 3. Submit a pull request
 
 ---
@@ -240,8 +265,6 @@ Want to help implement these features? Feel free to:
 - Built with modern web technologies
 - Inspired by the need for simple, secure file sharing
 - Thanks to the open-source community
-
----
 
 <div align="center">
   <p>Made with ❤️ for seamless file sharing</p>
