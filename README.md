@@ -18,7 +18,9 @@ In our daily lives, people often resort to logging into WhatsApp or Telegram on 
 
 SHARAEIN eliminates this outdated and risky practice by providing a secure, temporary, and password-protected environment for file sharing without requiring any personal account login. Simply create a room, share the ID and password, transfer your files, and close the session - no personal data left behind.
 
-### 👥 Team Members
+## 👥 Team Members
+
+This project was developed by:
 
 - **5220411082** - Restu Sofyan Ma'arif
 - **5220411358** - Musyafa Ali
@@ -225,6 +227,16 @@ SHARAEIN supports **ALL file types** including:
 - 💻 **Code** - JS, TS, Python, Java, C++
 - 🔧 **Executables** - EXE, MSI, APP, DEB
 - **And ANY other file format!**
+
+## 🎥 Demo Video
+
+<div align="center">
+  <video width="640" height="480" controls>
+    <source src="/DEMO_SHAREIN.mkv" type="video/x-matroska">
+    Your browser does not support the video tag.
+  </video>
+  <p><em>Watch the full demo of SHARAEIN in action</em></p>
+</div>
 
 ## 🤝 Contributing
 
